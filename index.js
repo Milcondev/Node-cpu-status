@@ -10,7 +10,7 @@ module.exports = {
 /* PUBLIC */
 
 function usagePercent(opts, cb) {
-  var cpus = os.cpus();
+  var cpustatus = os.cpustatus();
 
   var timeUsed;
   var timeUsed0 = 0;
@@ -45,7 +45,7 @@ function usagePercent(opts, cb) {
   ) {
     _error(opts.coreIndex, cpus.length);
     return cb('coreIndex "' + opts.coreIndex + '" out of bounds, ' +
-      'should be [0, ' + (cpus.length - 1) + ']');
+      'should be [0, ' + (cpustatus.length - 1) + ']');
   }
 
   //all cpu's average
@@ -56,7 +56,7 @@ function usagePercent(opts, cb) {
 
     setTimeout(function() {
       //take second measurement
-      cpu1 = os.cpus();
+      cpu1 = os.cpustatus();
 
       var diff = process.hrtime(time);
       var diffSeconds = diff[0] + diff[1] * 1e-9;
@@ -87,12 +87,12 @@ function usagePercent(opts, cb) {
   //only one cpu core
   } else {
     //take first measurement
-    cpu0 = os.cpus();
+    cpu0 = os.cpustatus();
     time = process.hrtime();
 
     setTimeout(function() {
       //take second measurement
-      cpu1 = os.cpus();
+      cpu1 = os.cpustatus();
 
       var diff = process.hrtime(time);
       var diffSeconds = diff[0] + diff[1] * 1e-9;
@@ -120,11 +120,11 @@ function usagePercent(opts, cb) {
 }
 
 function totalCores() {
-  return os.cpus().length;
+  return os.cpustatus().length;
 }
 
 function clockMHz(coreIndex) {
-  var cpus = os.cpus();
+  var cpustatus = os.cpustatus();
 
   //check core exists
   if (coreIndex < 0 ||
@@ -137,15 +137,15 @@ function clockMHz(coreIndex) {
       'should be [0, ' + (cpus.length - 1) + ']';
   }
 
-  return cpus[coreIndex].speed;
+  return cpustatus[coreIndex].speed;
 }
 
 function avgClockMHz() {
   var cpus = os.cpus();
   var totalHz = 0;
 
-  for (var i = 0; i < cpus.length; i++) {
-    totalHz += cpus[i].speed;
+  for (var i = 0; i < cpustatus.length; i++) {
+    totalHz += cpustatus[i].speed;
   }
 
   var avgHz = totalHz / cpus.length;
