@@ -21,12 +21,12 @@ Examples
 
 Require the module:
 ```
-var cpuStat = require('cpu-stat');
+var cpustatus = require('cpu-status');
 ```
 
 By default `usagePercent()` returns cpu usage percent for all cores over a period of the next 1000ms:
 ```
-cpuStat.usagePercent(function(err, percent, seconds) {
+cpustatus.usagePercent(function(err, percent, seconds) {
     if (err) {
       return console.log(err);
     }
@@ -60,19 +60,19 @@ cpuStat.usagePercent({
 
 Get the total number of cores:
 ```
-var totalCores = cpuStat.totalCores();
+var totalCores = cpustatus.totalCores();
 console.log(totalCores);
 ```
 
 Get the average clock MHz over all cores:
 ```
-var avgClockMHz = cpuStat.avgClockMHz();
+var avgClockMHz = cpustatus.avgClockMHz();
 console.log(avgClockMHz);
 ```
 
 Get the clock MHz for core with index 2:
 ```
-var avgClockMHzCore2 = cpuStat.clockMHz(2);
+var avgClockMHzCore2 = cpustatus.clockMHz(2);
 console.log(avgClockMHzCore2);
 ```
 
