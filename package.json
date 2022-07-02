@@ -8,7 +8,7 @@
     },
     "repository": {
       "type": "git",
-      "url": "https://github.com/jub3i/node-cpu-stat"
+      "url": "https://github.com/Milcondev/Node-cpu-status"
     },
     "keywords": [
       "cpu",
